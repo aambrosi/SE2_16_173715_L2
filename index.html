@@ -1,8 +1,45 @@
 <html>
     <head>
-    
+        <title>SE16 - Lab2</title>
+        <script src="script.js">
+        </script>
     </head>
-    <body>
-        
+    <body onload="load();">
+        <h1>
+            Software Engineer 2016: Lab2 - Esercizio
+        </h1>
+        <table border="1px" id="orderTable">
+            <tr id="itemRow">
+            </tr>
+            <tr id="valueRow">      
+            </tr>
+        </table>
+        <br>
+        <input id="orderButtonIndex" type="button" value="Ordina" onclick="discover();">
+        <br>
+        <div id="orderDiv" hidden="hidden">
+            Item: 
+            <input type="text" id="item">
+            <br>
+            Quantità: 
+            <input type="text" id="quantita"> <br>
+            <input type="button" value="Submit" onclick="addElement();">
+        </div>                   
     </body>
 </html>
+
+<!-- 
+gestione magazzino
+tabella con elementi presenti
+click su order items
+document get element by id
+table.rows.length da il nuemro delle righe
+cell.innerHTML = ""
+
+orderForm.style.display = "None" perchè non sia visinile
+
+fare un solo push sul master e non cancellare i branch fatti
+
+fare branch per nuova funzione
+campo sotto alla tabella con max sotrage space e bottone per fare l'update di questa cosa
+-->
