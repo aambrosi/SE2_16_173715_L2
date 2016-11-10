@@ -115,7 +115,7 @@ var addElement = function () {
     //controllo che l'utente non abbia lasciato vuoto il campo dell'item
     if (item !== "") {
         //mi assicuro che inserisca un valore accettabile e che non superi la capacita' massima
-        if (value >= 0) {
+        if (value > 0) {
             if ((sommaMerce() + value) <= capacitaMagazzino) {
                 if (ctrl === -1) {
                     //aggiungo una nuova colonna per il nuovo elemento e vi scrivo dentro nome e valore
