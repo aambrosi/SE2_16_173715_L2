@@ -15,34 +15,31 @@
             </tr>
         </table>
         <br>
+        Capacità magazzino:
+        <br>
+        <input type="number" id = "capacitaMagazzino" >
+        <input type="button" value = "Update" onclick="controlloCapacita();">
+        <br>
+        <br>
         <input type="button" value="Nuovo ordine" onclick="discover();">
         <br>
         <br>
         <div id="orderDiv" hidden="hidden">
-            Item: 
-            <input type="text" id="item">
-            <br>
-            Quantità: 
-            <input type="number" id="amount"> 
-            <br>
-            <br>
-            <input type="button" value="Fatto" onclick="addElement();">
+            <fieldset>
+                <legend>
+                    Dati del nuovo ordine:
+                </legend>
+                Item:
+                <br>
+                <input type="text" id="item">
+                <br>
+                Quantità:
+                <br>
+                <input type="number" id="amount"> 
+                <br>
+                <br>
+                <input type="button" value="Fatto" onclick="addElement();">
+            </fieldset>
         </div>                   
     </body>
 </html>
-
-<!-- 
-gestione magazzino
-tabella con elementi presenti
-click su order items
-document get element by id
-table.rows.length da il nuemro delle righe
-cell.innerHTML = ""
-
-orderForm.style.display = "None" perchè non sia visinile
-
-fare un solo push sul master e non cancellare i branch fatti
-
-fare branch per nuova funzione
-campo sotto alla tabella con max sotrage space e bottone per fare l'update di questa cosa
--->
