@@ -5,25 +5,28 @@
         </script>
     </head>
     <body onload="load();">
-        <h1>
+        <h2>
             Software Engineer 2016: Lab2 - Esercizio
-        </h1>
-        <table border="1px" id="orderTable">
+        </h2>
+        <table border="1">
             <tr id="itemRow">
             </tr>
             <tr id="valueRow">      
             </tr>
         </table>
         <br>
-        <input id="orderButtonIndex" type="button" value="Ordina" onclick="discover();">
+        <input type="button" value="Nuovo ordine" onclick="discover();">
+        <br>
         <br>
         <div id="orderDiv" hidden="hidden">
             Item: 
             <input type="text" id="item">
             <br>
             Quantità: 
-            <input type="text" id="quantita"> <br>
-            <input type="button" value="Submit" onclick="addElement();">
+            <input type="number" id="amount"> 
+            <br>
+            <br>
+            <input type="button" value="Fatto" onclick="addElement();">
         </div>                   
     </body>
 </html>

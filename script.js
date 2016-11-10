@@ -1,45 +1,56 @@
-/*
+/**
     Nome:       Ambrosi Andrea 
     Matricola:  173715
-    Data:       11/11/2016
+    Data:       10/11/2016
     Software Engineer - Esercizio seconda esercitazione laboratorio
 */
 
-var itemList = ["Banane", "Pere", "Mele"];
-var valueList = [5, 4, 6];
+/**
+ * @brief Inizializzo itemList e valueList con alcuni esempi.La variabile tableLength e' la lunghezza (in orizzontale) della tabella che mi servira' quando dovro' aggiungere nuovi elementi. RADIX e' la base per quando uso il parseInt.
+ */
+var itemList = ["Mele", "Pere", "Prugne"];
+var valueList = [5, 10, 4];
+var tableLength = 3;
+var RADIX = 10;
 
-/*
-    Quando carico la pagina aggiungo subito gli elementi
-    che ho gia' in magazzino
-*/
+/**
+ * @brief   Quando carico la pagina aggiungo subito alcuni elementi al magazzino come esempio per l'utente.
+ * @param [in] Nessun parametro d'ingresso.
+ * @return Nessun parametro di ritorno.
+ */
 var load = function () {
+    "use strict";
     var items = document.getElementById("itemRow"),
         values = document.getElementById("valueRow"),
         i = 0;
-
-    for (i = itemList.length; i > 0; i = i - 1) {
-        items.insertCell(0).innerHTML = itemList[i - 1];
-        values.insertCell(0).innerHTML = valueList[i - 1];
+    
+    for (i = 0; i < tableLength; i = i + 1) {
+        //per ogni elemento creo una nuova colonna e aggiungo relativi dati
+        items.insertCell(i).innerHTML = itemList[i];
+        values.insertCell(i).innerHTML = valueList[i];
     }
 };
 
-/*
-    utilizzzo questa funzione per aggiungere il div che contiene i campi per inserire un nuovo ordine
-    la funzione viene attivata dal click sul bottone "orderButtonIndex"
-*/
+/**
+ * @brief Utilizzzo questa funzione per scoprire il div che contiene i campi per inserire un nuovo ordine (dato che all'inizio è nascosto). La funzione viene attivata dal click sul bottone "Nuovo Ordine".
+ * @param [in] Nessun parametro d'ingresso.
+ * @return Nessun parametro di ritorno.
+ */
 var discover = function () {
+    "use strict";
     var orderDiv = document.getElementById('orderDiv');
     if (orderDiv.style.display !== 'block' || orderDiv.style.display !== '') {
         orderDiv.style.display = 'block';
     }
 };
 
-/*
-    Funzione per controllare la presenza di un item all'interno del magazzino.
-    Parametri d'ingresso: var newElement (elemento di cui controllare la presenza).
-    Ritorna -1 se l'item non è presente e l'indice nel vettore se invece e' presente.
-*/
+/**
+ * @brief Funzione per controllare la presenza di un item all'interno del magazzino.
+ * @param [in] newElement: String - elemento di cui controllare la presenza.
+ * @return Ritorna -1 se l'item non è presente e l'indice nella lista se invece l'item e' presente.
+ */
 var controllaPresenza = function (newElement) {
+    "use strict";
     var trovato = false,
         index = -1,
         i = 0;
@@ -53,29 +64,43 @@ var controllaPresenza = function (newElement) {
     return index;
 };
 
-/*
-    Questa funzione mi serve per aggiungere il nuovo elemento alla lista
-    gia' presente e per aggiornare la pagina index.html dell'avvenimento
-*/
+/**
+ * @brief Questa funzione mi serve per aggiungere il nuovo elemento alla lista gia' presente e per aggiornare la pagina index.html dell'avvenimento. Se invece voglio aggiungere item uguali a quelli che ho già in magazzino aggiorno solamente il contatore associato.
+ * @param [in] Nessun parametro d'ingresso.
+ * @return Nessun parametro di ritorno.
+ */
 var addElement = function () {
+    "use strict";
     var items = document.getElementById("itemRow"),
         values = document.getElementById("valueRow"),
         item = document.getElementById("item").value,
-        value = parseInt(document.getElementById("quantita").value),
+        value = parseInt(document.getElementById("amount").value, RADIX),
+        //il valore di ctrl mi indichera' se l'item e' o meno presente nel magazzino
         ctrl = controllaPresenza(item),
-        x = items.insertCell(0),
-        y = values.insertCell(0),
+        //mi restituisce un "array di celle"
         c = values.cells;
-    
-    if (ctrl === -1) {
-        x.innerHTML = item;
-        itemList.push(item);
-        
-        y.innerHTML = value;
-        valueList.push(value);
+    //controllo che l'utente non abbia lasciato vuoto il campo dell'item
+    if (item !== ""){
+        //mi assicuro che inserisca un valore accettabile
+        if (value >= 0) {
+            if (ctrl === -1) {
+                //aggiungo una nuova colonna per il nuovo elemento e vi scrivo dentro nome e valore
+                items.insertCell(tableLength).innerHTML = item;
+                values.insertCell(tableLength).innerHTML = value;
+                //aggiungo il nuovo elemento anche nel magazzino
+                itemList.push(item);
+                valueList.push(value);
+                //aggiorno la lunghezza della tabella
+                tableLength += 1;
+            } else {
+                //prodotto gia' presente, aggiorno il magazzino ed anche la tabella
+                valueList[ctrl] += value;
+                c[ctrl].innerHTML = valueList[ctrl];
+            }
+        } else {
+            alert("Quantità non valida!");
+        }
     } else {
-        valueList[ctrl] += value;
-        
-        c[ctrl].innerHTML = valueList[ctrl];
+        alert("Inserisci il nome del prodotto!");
     }
 };
